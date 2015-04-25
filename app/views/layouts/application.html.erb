@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Test1</title>
+</head>
+<body>
+<header>
+  <nav>
+    <!-- player_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+    <% if player_signed_in? %> 
+      <!-- current_player は現在ログインしているplayerオブジェクトを返すdeviseのHelperメソッド -->
+      <!-- *_path はplayerモデルを作成したときに、
+        deviseにより自動で作成されてますので、rake routesで確認できます -->
+      Logged in as <strong><%= current_player.email %></strong>.
+      <%= link_to 'プロフィール変更', edit_player_registration_path %> |
+      <%= link_to "ログアウト", destroy_player_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "サインイン", new_player_registration_path %> |
+      <%= link_to "ログイン", new_player_session_path %>
+    <% end %>
+  </nav>
+</header>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>
